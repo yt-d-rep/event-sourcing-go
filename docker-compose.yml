@@ -1,0 +1,39 @@
+name: event-sourcing-go
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    tty: true
+    volumes:
+      - .:/go/src/github.com/yt-d-rep/event-sourcing-go
+
+  db:
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  dynamodb:
+    image: amazon/dynamodb-local:latest
+    container_name: dynamodb
+    command: -jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath .
+    ports:
+      - "60502:8000"
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    container_name: dynamodb-admin
+    depends_on:
+      - dynamodb
+    environment:
+      DYNAMO_ENDPOINT: ${DYNAMO_ENDPOINT:-dynamodb:8000}
+      AWS_REGION: ${AWS_REGION:-dynamodb}
+    ports:
+      - 8001:8001
