@@ -6,3 +6,6 @@ gen-wire:
 
 setup-db:
 	bash ./tool/store/create_writer_tables.sh
+
+serve:
+	go run main.go

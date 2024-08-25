@@ -9,7 +9,7 @@ readonly ENDPOINT=http://dynamodb:8000
 
 aws dynamodb create-table --table-name user \
   --attribute-definitions \
-    AttributeName=ID,AttributeType=N \
+    AttributeName=ID,AttributeType=S \
     AttributeName=CreatedAt,AttributeType=S \
   --key-schema \
     AttributeName=ID,KeyType=HASH \

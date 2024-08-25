@@ -6,7 +6,7 @@ import (
 )
 
 type User struct {
-	ID        int    `dynamodbav:"ID"`
+	ID        string `dynamodbav:"ID"`
 	Name      string `dynamodbav:"Name"`
 	Event     string `dynamodbav:"Event"`
 	CreatedAt string `dynamodbav:"CreatedAt"`

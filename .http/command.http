@@ -1,0 +1,7 @@
+### POST /user
+POST {{url:api}}/user
+Content-Type: application/json
+
+{
+  "name": "John Doe"
+}

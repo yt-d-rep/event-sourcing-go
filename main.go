@@ -1,14 +1,9 @@
 package main
 
 import (
-	usercommand "yt-d-rep/github.com/event-sourcing-go/command/user_command"
+	"yt-d-rep/github.com/event-sourcing-go/infrastructure/server"
 )
 
 func main() {
-	userCommand := usercommand.Wire()
-
-	err := userCommand.Create()
-	if err != nil {
-		panic(err)
-	}
+	server.Serve()
 }
