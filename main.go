@@ -7,5 +7,8 @@ import (
 func main() {
 	userCommand := usercommand.Wire()
 
-	userCommand.Create()
+	err := userCommand.Create()
+	if err != nil {
+		panic(err)
+	}
 }

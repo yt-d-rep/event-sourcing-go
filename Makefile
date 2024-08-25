@@ -3,3 +3,6 @@ install:
 
 gen-wire:
 	wire ./...
+
+setup-db:
+	bash ./tool/store/create_writer_tables.sh

@@ -8,12 +8,14 @@ package usercommand
 
 import (
 	"yt-d-rep/github.com/event-sourcing-go/infrastructure/repository/user"
+	"yt-d-rep/github.com/event-sourcing-go/infrastructure/store"
 )
 
 // Injectors from wire.go:
 
 func Wire() *handler {
-	userRepository := user.ProvideUserRepository()
+	writer := store.ProvideWriter()
+	userRepository := user.ProvideUserRepository(writer)
 	usercommandUsecase := ProvideUsecase(userRepository)
 	usercommandHandler := ProvideHandler(usercommandUsecase)
 	return usercommandHandler

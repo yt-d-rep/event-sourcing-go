@@ -4,6 +4,7 @@ import (
 	"sync"
 
 	domainUser "yt-d-rep/github.com/event-sourcing-go/domain/user"
+	"yt-d-rep/github.com/event-sourcing-go/infrastructure/store"
 
 	"github.com/google/wire"
 )
@@ -19,9 +20,11 @@ var (
 	)
 )
 
-func ProvideUserRepository() *userRepository {
+func ProvideUserRepository(writer store.Writer) *userRepository {
 	uRepoOnce.Do(func() {
-		uRepo = &userRepository{}
+		uRepo = &userRepository{
+			writer: writer,
+		}
 	})
 	return uRepo
 }

@@ -14,7 +14,10 @@ type (
 )
 
 func (u *usecase) Create() error {
-	newUser := domainUser.NewUser(1)
-	u.uRepo.Create(newUser)
+	newUser := domainUser.NewUser(1, "John Doe")
+	err := u.uRepo.Create(newUser)
+	if err != nil {
+		return err
+	}
 	return nil
 }
